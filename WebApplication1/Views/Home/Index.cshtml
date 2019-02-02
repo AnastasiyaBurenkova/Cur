@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Products";
+}
+
+@model IEnumerable<WebApplication1.Models.Product>
+@{
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Список продуктов</title>
+    <link rel="stylesheet" href="~/Content/styles.css" type="text/css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300" type="text/css" />
+    <title>Выравнивание фотографии по центру</title>
+</head>
+
+
+<style>
+
+    .fig {
+        text-align: center; /* Выравнивание по центру */
+    }
+
+
+    .center {
+        width: 700px; /* Ширина элемента в пикселах */
+        padding: 10px; /* Поля вокруг текста */
+        margin: auto; /* Выравниваем по центру */
+    }
+</style>
+<div class="card mb-3">
+    <img class="card-img-top" src="~/img/home.jpg" alt="Card image cap">
+</div>
+<div id="wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light" style=" background-color: #e3f2fd;">
+        <a class="navbar-brand" href="#">Меню</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link">
+                    @Html.ActionLink("Главная", "Index", "Home")
+                </a>
+                <a class="nav-item nav-link">
+                    @Html.ActionLink("Список менеджеров", "Managers", "Manager")
+                </a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Продукты
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item">
+                            @Html.ActionLink("Список продуктов", "Products", "Product")
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">
+                            @Html.ActionLink("Изменить цену", "EditCost", "Product")
+                        </a>
+                    </div>
+                </li>
+                <a class="nav-item nav-link">
+                    @Html.ActionLink("Список клиентов", "Clients", "Client")
+                </a>
+                <a class="nav-item nav-link">
+                    @Html.ActionLink("Список контрактов", "Contracts", "Contract")
+                </a>
+                <a class="nav-item nav-link">
+                    @Html.ActionLink("Архивация", "DeleteToArchieve", "Archieve")
+                </a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Поиск
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item">
+                            @Html.ActionLink("Найти продукт", "FindProductDate", "Contract")
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">
+                            @Html.ActionLink("Поиск информации о виде продукции", "FindIDContract", "Contract")
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Отчеты
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item">
+                            @Html.ActionLink("Выбока клиента которые купили продукт заданного вида на заданный месяц", "FindClientsVid", "Contract")
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">
+                            @Html.ActionLink("Отчеты менеджера", "FindContractsAgent", "Contract")
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">
+                            @Html.ActionLink("Данные о стоимости", "FindClientsVidS", "Contract")
+                        </a>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+</div>
+<body>
+    <div id="wrapper">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="~/img/1jpg.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="~/img/2.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="~/img/3.jpg" alt="Third slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</body>
+<body>
+    <div id="wrapper">
+        <h2>Cистемы сбыта готовой продукции предприятия по договорам</h2>
+
+        
+       
+    </div>
+</body>
+<footer>
+    <div class="card mb-3">
+        <div class="card-body text-info">
+            <h5 class="card-title">Модуль «АРМ менеджера по ведению договоров с заказчиками»</h5>
+            <p class="card-body text-info">
+                Менеджер по ведению договоров заключает договора с заказчиками, информирует о заказе производственный отдел, передает приказ-накладную на отгрузку готовой продукции в экспедицию.
+            <p>
+                Автор студентка гр. ИСЭбд-31.
+            <p>
+                Анастасия Буренкова
+            </p>
+        </div>
+    </div>
+</footer>
+

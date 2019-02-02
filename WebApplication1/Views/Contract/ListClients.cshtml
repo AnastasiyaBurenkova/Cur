@@ -1,0 +1,11 @@
+﻿@model  WebApplication1.ViewModel.AgentContractsListViewModel
+<h2>Список клиентов для заданного менеджера</h2>
+@{ var grid = new WebGrid(Model.Contracts); }
+<div>
+    @grid.GetHtml(columns: grid.Columns(
+
+                                                 grid.Column("ManagerName", "Агент"),
+                                                 grid.Column("ClientName", "Клиент")
+                                                        ), tableStyle: "table-bordered")
+
+</div>

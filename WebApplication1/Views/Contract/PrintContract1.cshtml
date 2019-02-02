@@ -1,0 +1,13 @@
+﻿@model WebApplication1.Models.Contract
+<div id="wrapper">
+    <h2>Договор на поставку продукции № @Model.ID</h2>
+
+    <p>Продукт @Model.ProductName
+    <p>Вид:&nbsp;&nbsp;&nbsp;&nbsp; @Model.Vid</p>
+    <p>Срок заявки: с @Model.DateProduct &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;по&nbsp;&nbsp;&nbsp;&nbsp; @Model.DateEndProduct</p>
+    <p>Количество: @Model.Count</p>
+    <p>Итого к оплате:&nbsp;&nbsp;&nbsp; @Model.Sum&nbsp;&nbsp;&nbsp;рублей</p>
+    <p>Дата заключения договора: &nbsp;&nbsp;&nbsp; @Model.Date</p>
+    <p>Клиент @Model.ClientName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись клиента_____________</p>
+    <p>Менеджер  @Model.ManagerName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись менеджер______________</p>
+</div>

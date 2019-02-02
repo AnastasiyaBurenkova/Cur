@@ -1,0 +1,194 @@
+﻿@Scripts.Render("~/scripts/jquery-1.10.2.js")
+@Scripts.Render("~/scripts/jquery.validate.min.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Добавить клиента</title>
+    <link rel="stylesheet" href="~/Content/styles.css" type="text/css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300" type="text/css" />
+    <title>Выравнивание фотографии по центру</title>
+</head>
+<div class="card mb-3">
+    <img class="card-img-top" src="/img/home.jpg" alt="Card image cap">
+</div>
+<style>
+
+    .fig {
+        text-align: center; /* Выравнивание по центру */
+    }
+
+    .center {
+        width: 700px; /* Ширина элемента в пикселах */
+        padding: 10px; /* Поля вокруг текста */
+        margin: auto; /* Выравниваем по центру */
+    }
+</style>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light" style=" background-color: #e3f2fd;">
+            <a class="navbar-brand" href="#">Меню</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link">
+                        @Html.ActionLink("Главная", "Index", "Home")
+                    </a>
+                    <a class="nav-item nav-link">
+                        @Html.ActionLink("Список менеджеров", "Managers", "Manager")
+                    </a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Продукты
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item">
+                                @Html.ActionLink("Список продуктов", "Products", "Product")
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">
+                                @Html.ActionLink("Изменить цену", "EditCost", "Product")
+                            </a>
+                        </div>
+                    </li>
+                    <a class="nav-item nav-link">
+                        @Html.ActionLink("Список клиентов", "Clients", "Client")
+                    </a>
+                    <a class="nav-item nav-link">
+                        @Html.ActionLink("Список контрактов", "Contracts", "Contract")
+                    </a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Поиск
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item">
+                                @Html.ActionLink("Найти продукт", "FindProductDate", "Contract")
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">
+                                @Html.ActionLink("Поиск информации о виде продукции", "FindIDContract", "Contract")
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Отчеты
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item">
+                                @Html.ActionLink("Выбока клиента которые купили продукт заданного вида на заданный месяц", "FindClientsVid", "Contract")
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">
+                                @Html.ActionLink("Отчеты менеджера", "FindContractsAgent", "Contract")
+                            
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">
+                                @Html.ActionLink("Данные о стоимости", "FindClientsVidS", "Contract")
+                            </a>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </nav>
+        @{
+            ViewBag.Title = "Добавить клиента";
+        }
+
+        @model WebApplication1.Models.Client
+        @{
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+
+        <script type="text/javascript">
+            function checkForm() {
+
+                var regex = new RegExp("^([0-9]{4}.[0-9]{6})$");
+                var regexdate = new RegExp("^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.]((19|20)\\d\\d)$");
+                var name = $('#Name').val();
+                var date = $('#DateBirth').val();
+                var gender = $('#Gender').val();
+                var phone = $('#Phone').val();
+                var passport = $('#passportID').val();
+
+                var submitButton = $('#submitButton');
+
+                if ((name == "") || (date == "") || (gender == "") || (passport == "") || (phone == "") || (regex.test(passport) == false) || (regexdate.test(date) == false)) {
+                    submitButton.prop('disabled', true);
+                }
+                else {
+                    submitButton.prop('disabled', false);
+
+                }
+            }</script>
+
+        <table width="100%" cellspacing="4" cellpadding="4">
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true);
+                <tr>
+                    <td align="right" width="100">
+                        <h2>Добавить клиента</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td> @Html.LabelFor(model => model.Name, "ФИО")</td>
+                    <td> @Html.EditorFor(model => model.Name, new { htmlAttributes = new { onchange = "checkForm()" } })</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.DateBirth, "Дата рождения")</td>
+                    <td>@Html.EditorFor(model => model.DateBirth, new { htmlAttributes = new { onchange = "checkForm()" } })</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Введите дату в формате дд/мм/гггг</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.Gender, "Пол")</td>
+                    <td>@Html.EditorFor(model => model.Gender, new { htmlAttributes = new { onchange = "checkForm()" } })</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.passportID, "Паспортные данные")</td>
+                    <td>@Html.EditorFor(model => model.passportID, new { htmlAttributes = new { onchange = "checkForm()" } })</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Введите данные в формате 1234.123456</td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.Phone, "Номер телефона")</td>
+                    <td>@Html.EditorFor(model => model.Phone, new { htmlAttributes = new { onchange = "checkForm()" } })</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input id="submitButton" class="btn btn-info" type="submit" value="Добавить" disabled /></td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+<footer>
+    <div class="card mb-3">
+        <div class="card-body text-info">
+            <h5 class="card-title">Модуль «АРМ менеджера по ведению договоров с заказчиками»</h5>
+            <p class="card-body text-info">
+                Менеджер по ведению договоров заключает договора с заказчиками, информирует о заказе производственный отдел, передает приказ-накладную на отгрузку готовой продукции в экспедицию.
+            <p>
+                Автор студентка гр. ИСЭбд-31.
+            <p>
+                Анастасия Буренкова
+            </p>
+        </div>
+    </div>
+</footer>
+

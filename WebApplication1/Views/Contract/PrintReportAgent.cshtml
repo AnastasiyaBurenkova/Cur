@@ -1,0 +1,28 @@
+﻿@model  WebApplication1.ViewModel.AgentContractsListViewModel
+<h2>Ежемесячная ведомость заказов для производственного отдела</h2>
+@{ var grid = new WebGrid(Model.Contracts); }
+<div>
+    @grid.GetHtml(columns: grid.Columns(
+
+                                                 grid.Column("ManagerName", "Менеджер"),
+                                                 grid.Column("ClientName", "Клиент"),
+                                                 grid.Column("Date", "Дата заключения договора"),
+                                                 grid.Column("Sum", "Сумма контракта"),
+                                                  grid.Column("ProductName", "Продукт"),
+                                                 grid.Column("Count", "Количество")
+                                                        ), tableStyle: "table-bordered")
+
+</div>
+<form method="get">
+    <div class="form-inline">
+        <br /><br />
+        <br /><br />
+        @Html.LabelFor(model => model.SumContract, "Сумма договора:  ")
+        @Html.EditorFor(model => model.SumContract, new { htmlAttributes = new { onchange = "checkForm()" } })
+
+       
+    </div>
+</form>
+
+
+
